@@ -6,7 +6,7 @@ require('dotenv').config()
 
 
 const { MongoClient, ObjectId } = require('mongodb');
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.gg2xv.mongodb.net/repairService?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.w9eor.mongodb.net/repaireService?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
  
 // parse application/x-www-form-urlencoded
