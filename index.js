@@ -6,7 +6,7 @@ require('dotenv').config()
 
 
 const { MongoClient, ObjectId } = require('mongodb');
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.w9eor.mongodb.net/repairService?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.w9eor.mongodb.net/travelAgency?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
  
 // parse application/x-www-form-urlencoded
@@ -19,8 +19,8 @@ app.use(cors())
 
 
 client.connect(err => {
-// review collection:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  const reviewCollection = client.db("repairService").collection("review");
+// review collection
+  const reviewCollection = client.db("travelAgency").collection("review");
   app.post("/addReview", (req, res) =>{
     reviewCollection.insertOne(req.body)
     .then(result => {
@@ -34,8 +34,8 @@ client.connect(err => {
       res.send(documents)
     })
   })
-  // addmin Collection:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  const adminCollection =  client.db("repairService").collection("admin");
+  // addmin Collection
+  const adminCollection =  client.db("travelAgency").collection("admin");
   app.post('/addAdmin', (req, res) =>{
     adminCollection.insertOne(req.body)
     .then(result=>{
@@ -48,14 +48,14 @@ client.connect(err => {
       res.send(documents)
     })
   })
-  // finding admin by email ;;;;;;;;;;;;;;;
+  // finding admin by email 
   app.get("/getAdmin/:email",(req, res) => {
     adminCollection.find({email: req.query.email})
     .toArray((err, documents) =>{
       res.send(documents)
     })
   })
-  // delete admin::::::::::::::::::::
+  // delete admin
   app.delete("/deleteAdmin/:id", (req, res ) => {
     const adminId = req.params.id;
     console.log(adminId)
@@ -65,8 +65,8 @@ client.connect(err => {
     })
   })
   
-// services collection::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    const serviceCollection = client.db("repairService").collection("service");
+// services collection
+    const serviceCollection = client.db("travelAgency").collection("service");
     app.post('/addService', (req, res) => {
       serviceCollection.insertOne(req.body)
       .then(result => {
@@ -80,7 +80,7 @@ client.connect(err => {
         res.send(documents)
       })
     })
-     // delete servic::::::::::::::::::::
+     // delete service
   app.delete("/deleteService/:id", (req, res ) => {
     const adminId = req.params.id;
     console.log(adminId)
@@ -90,8 +90,8 @@ client.connect(err => {
     })
   })
 
-    // booking collection::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    const bookingListCollection = client.db("repairService").collection("bookingList");
+    // booking collection
+    const bookingListCollection = client.db("travelAgency").collection("bookingList");
     app.post('/bookingList', (req, res) => {
         bookingListCollection.insertOne(req.body)
         .then(result=> {
